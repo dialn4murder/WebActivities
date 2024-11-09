@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Activities</string>
+    <string name="search_terms">Search Terms</string>
+    <string name="stack_overflow">Stack Overflow</string>
+    <string name="google">Google</string>
+    <string name="kotlin_docs">Kotlin Docs</string>
+    <string name="android_developer">Android Developer</string>
+    <string name="previous">Previous</string>
+    <string name="activities">Activities</string>
+</resources>
