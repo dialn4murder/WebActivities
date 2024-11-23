@@ -11,6 +11,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.activities.databinding.ActivityMainBinding
 import java.net.URLEncoder
 import android.content.Intent
+import android.os.PersistableBundle
 import android.text.TextWatcher
 import android.view.View
 import android.text.Editable
@@ -42,13 +43,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
 
+        super.onCreate(savedInstanceState)
+
+        enableEdgeToEdge()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        //prevUrl = savedInstanceState?.getString("url")
+
+        //prevUrl = savedInstanceState?.getBundle("url").toString()
+        if (savedInstanceState != null){
+            prevUrl = savedInstanceState.getString("url")
+            //binding.etSearch.
+        }
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -82,6 +93,7 @@ class MainActivity : AppCompatActivity() {
                 toggleButtonsState(binding.etSearch.text.length > 1)
             }
         })
+
         // Disables buttons
         toggleButtonsState(false)
     }
@@ -90,4 +102,24 @@ class MainActivity : AppCompatActivity() {
         intent.putExtra("url", url)
         resultLauncher.launch((intent))
     }
+
+//    override fun onPause() {
+//        var savedUrl = prevUrl
+//        super.onPause()
+//
+//
+//    }
+
+    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
+        //outPersistentState.putString("url", prevUrl)
+        super.onSaveInstanceState(outState, outPersistentState)
+        outState.putString("url", prevUrl)
+        outState.putString("search", binding.etSearch.text.toString())
+
+    }
+
+//    override fun onRestart() {
+//
+//        super.onRestart()
+//    }
 }
